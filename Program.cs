@@ -87,38 +87,51 @@ namespace ContactManager
             }
         }
 
-        static void AddContact(List<Contact> contacts)
-        {
-            Console.Write("Enter first name: ");
-            string firstName = Console.ReadLine();
+      static void AddContact(List<Contact> contacts)
+{
+    Console.Write("Enter first name: ");
+    string firstName = Console.ReadLine();
 
-            Console.Write("Enter last name: ");
-            string lastName = Console.ReadLine();
+    Console.Write("Enter last name: ");
+    string lastName = Console.ReadLine();
 
-            Console.Write("Enter email address: ");
-            string emailAddress = Console.ReadLine();
+    Console.Write("Enter email address: ");
+    string emailAddress = Console.ReadLine();
 
-            while (!IsValidEmail(emailAddress))
-            {
-                Console.WriteLine("Invalid email address. Please enter a valid email address.");
-                Console.Write("Enter email address: ");
-                emailAddress = Console.ReadLine();
-            }
+    while (!IsValidEmail(emailAddress))
+    {
+        Console.WriteLine("Invalid email address. Please enter a valid email address.");
+        Console.Write("Enter email address: ");
+        emailAddress = Console.ReadLine();
+    }
 
-            Console.Write("Enter phone number: ");
-            string phoneNumber = Console.ReadLine();
+    Console.Write("Enter phone number: ");
+    string phoneNumber = Console.ReadLine();
 
-            while (!IsValidPhoneNumber(phoneNumber))
-            {
-                Console.WriteLine("Invalid phone number. Please enter a valid phone number.");
-                Console.Write("Enter phone number: ");
-                phoneNumber = Console.ReadLine();
-            }
+    while (!IsValidPhoneNumber(phoneNumber))
+    {
+        Console.WriteLine("Invalid phone number. Please enter a valid phone number.");
+        Console.Write("Enter phone number: ");
+        phoneNumber = Console.ReadLine();
+    }
 
-            contacts.Add(new Contact { FirstName = firstName, LastName = lastName, EmailAddress = emailAddress, PhoneNumber = phoneNumber });
-            Console.WriteLine("Contact added successfully.");
-        }
+    // Check if the email or phone number already exists in the list
+    if (contacts.Any(c => c.EmailAddress == emailAddress))
+    {
+        Console.WriteLine("Email address already exists.");
+        return;
+    }
 
+    if (contacts.Any(c => c.PhoneNumber == phoneNumber))
+    {
+        Console.WriteLine("Phone number already exists.");
+        return;
+    }
+
+    contacts.Add(new Contact { FirstName = firstName, LastName = lastName, EmailAddress = emailAddress, PhoneNumber = phoneNumber });
+    Console.WriteLine("Contact added successfully.");
+}
+S
         static void RemoveContact(List<Contact> contacts)
         {
             Console.Write("Enter the index of the contact to remove: ");
